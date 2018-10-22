@@ -1,0 +1,28 @@
+#!/bin/bash
+
+echo "Run command:"
+echo "  mpirun -np 5 ./matrix-model --synch=3 --nlp=2 --end=1000.0 \\"
+echo "    --extramem=1000 --report-interval=0.1 --clock-rate=1e6"
+echo ""
+
+mpirun -np 5 ./matrix-model --synch=3 --nlp=2 --end=1000.0 \
+  --extramem=1000 --report-interval=0.1 --clock-rate=1e6
+
+# Output: 
+#
+# FINAL STATE:
+#   nforward  =       465898
+#   nbackward =       366165
+#   ncommit   =        99733
+#   nf-nb-nc  =            0
+#   A =
+#              17394         38202         57873         40578         36947
+#              46645         16103         32672         28802         41526
+#              15350         64348         49091          9443         13242
+#              29440         36435         64372         59692          2501
+#              53204         32964         14825         33925         19725
+#
+#
+#   ncommit and the A matrix should be identical for any
+#   run with same end time and same total number of LP's.
+#
