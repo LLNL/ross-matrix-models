@@ -1,5 +1,9 @@
+# Matrix Models
+
 This repository contains 2 models for testing the LLNL-modified version of ROSS.
 They demonstrate the use of the time class, LP interface, and event cancellation.
+
+## Models
 
 matrix:
 
@@ -11,46 +15,51 @@ matrix-cancel:
   A model used for debugging and illustration of event cancellation (retraction).
   Also exercises commit function.
 
-Building the code:
+## Building the code:
 
 1. Build the LLNL-modified ROSS:
-   cd ross/src
-   # Edit Makefile to set copmiler name (one of the first lines)
-   # currectly the compiler is mpicxx (MPI C++ compiler necessary).
-   # Make and copy library to ../lib directory:
-   make
-   make install
-   cd ../..
+
+    cd ross/src
+    # Edit Makefile to set copmiler name (one of the first lines)
+    # currectly the compiler is mpicxx (MPI C++ compiler necessary).
+    # Make and copy library to ../lib directory:
+    make
+    make install
+    cd ../..
 
 2. Build matrix model:
-   cd matrix
-   # Set compiler also in compile.matrix-model
-   # Build:
-   . compile.matrix-model
-   cd ..
+
+    cd matrix
+    # Set compiler also in compile.matrix-model
+    # Build:
+    . compile.matrix-model
+    cd ..
 
 3. Run test:
-   cd matrix
-   # Test run script usus mpirun to launch a parallel job.
-   # this is a small test and runs as is on many login nodes,
-   # workstations, and laptops. For other machines, getting
-   # a node allocation might be required first, and perhaps
-   # replacing mpirun with e.g. srun.
-   ./run.matrix-model
 
-   # The output of the test run can be compared for correctness
-   # with sample output at the end of the run.matrix-model file.
-   # See that file for more details.
-   cd ..
+    cd matrix
+    # Test run script usus mpirun to launch a parallel job.
+    # this is a small test and runs as is on many login nodes,
+    # workstations, and laptops. For other machines, getting
+    # a node allocation might be required first, and perhaps
+    # replacing mpirun with e.g. srun.
+    ./run.matrix-model
+
+    # The output of the test run can be compared for correctness
+    # with sample output at the end of the run.matrix-model file.
+    # See that file for more details.
+    cd ..
 
 4. Build matrix-cancel model:
-   cd matrix-cancel
-   . compile.matrix-cancel
-   cd ..
+
+    cd matrix-cancel
+    . compile.matrix-cancel
+    cd ..
 
 5. Run matrix-cancel test:
-   cd matrix-cancel
-   ./runloop.sh
+
+    cd matrix-cancel
+    ./runloop.sh
 
    Test takes maybe a couple of minutes. Lots of text data is eventually
    dumped to the screen. This data is also saved in files with names
