@@ -74,3 +74,9 @@ matrix-cancel:
 
 
 6. Enjoy :-)
+
+## Release
+
+For release details and restrictions, please read the [LICENSE](https://github.com/LLNL/ross-matrix-models/blob/master/LICENSE) and [NOTICE](https://github.com/LLNL/ross-matrix-models/blob/master/NOTICE) files.
+
+LLNL-CODE-764399
