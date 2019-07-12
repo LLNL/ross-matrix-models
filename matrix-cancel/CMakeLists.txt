@@ -5,5 +5,6 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 LIST(APPEND mc_srcs
   matrix-cancel-model.cc)
 
+FIND_PACKAGE(MPI)
 ADD_EXECUTABLE(matrix-cancel ${mc_srcs})
-TARGET_LINK_LIBRARIES(matrix-cancel ROSS)
+TARGET_LINK_LIBRARIES(matrix-cancel ROSS ${MPI_CXX_LIBRARIES})

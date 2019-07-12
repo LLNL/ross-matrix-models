@@ -77,7 +77,7 @@ main(int argc, char **argv, char **env)
 	matlp::global_stat.A[i*nmat+j] = (i == j);
   }
 
-  tw_define_lps(nlp_per_pe, sizeof(Event), 0);
+  tw_define_lps(nlp_per_pe, sizeof(Event));
 
   if(0) {
     for(int i = 0; i<(int) tw_nnodes(); i++) {
