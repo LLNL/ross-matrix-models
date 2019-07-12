@@ -43,13 +43,11 @@ const tw_optdef app_opt[] =
     TWOPT_END()
   };
 
-int main(int argc, char *argv[]) {
+#define matrix_main main
+int matrix_main(int argc, char *argv[]) {
   int i;
 
   //printf("Process starting main...\n");
-
-  // get rid of error if compiled w/ MEMORY queues
-  g_tw_memory_nqueues=1;
 
   //printf("Calling tw_opt_add\n");
   tw_opt_add(app_opt);
@@ -58,10 +56,8 @@ int main(int argc, char *argv[]) {
   tw_init(&argc, &argv);
   //printf("tw_init returned.\n");
 
-  g_tw_memory_nqueues = 16; // give at least 16 memory queue event
-
   offset_lpid = g_tw_mynode * nlp_per_pe;
-  ttl_lps = tw_nnodes() * g_tw_npe * nlp_per_pe;
+  ttl_lps = tw_nnodes() * 1 * nlp_per_pe; // g_tw_npe is always 1
   g_tw_events_per_pe = nlp_per_pe * 10;
 
   /* Initialize statistics data... */ {
@@ -74,7 +70,7 @@ int main(int argc, char *argv[]) {
   }
 
   /* nlp_per_pe: number of lps per processing element */
-  tw_define_lps(nlp_per_pe, sizeof(Event), 0);
+  tw_define_lps(nlp_per_pe, sizeof(Event));
   for(i = 0; i < (int) g_tw_nlp; i++) {
     // setup type of LP (recording function pointers for LP(i)
     // this also calls the init function

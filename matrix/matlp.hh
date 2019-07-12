@@ -297,11 +297,11 @@ struct matlp : public lp {
     /* Make new event to send... */ {
       long long int nlp_total =
         ((long long int) tw_nnodes()) *
-        ((long long int) g_tw_npe) *
+        ((long long int) 1) *    // g_tw_npe is always 1 now
         ((long long int) g_tw_nlp);
       tw_stime now = tw_now(twlp);
       tw_stime trecv;
-      
+
       double dt = tw_rand_exponential(twlp->rng,mean_delay);
       tw_lpid dest = tw_rand_integer(twlp->rng,0,nlp_total-1);
       trecv.t = now.t + dt;
