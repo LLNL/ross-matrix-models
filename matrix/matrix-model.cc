@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
   /* nlp_per_pe: number of lps per processing element */
   tw_define_lps(nlp_per_pe, sizeof(Event), 0);
   for(i = 0; i < (int) g_tw_nlp; i++) {
-    // setup type of LP (recording function pointers for LP(i) 
+    // setup type of LP (recording function pointers for LP(i)
     // this also calls the init function
     tw_lp_settype(i, &mylps[0]);
   }

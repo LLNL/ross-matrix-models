@@ -39,7 +39,7 @@ int matinv(int n,myuint X[],myuint Y[]) {
 
   for(int i = 0; i<n; i++)
     p[i] = q[i] = i;
-    
+
   for(int i = 0; i<n; i++) {
     for(int j = 0; j<n; j++)
       Y[i*n+j] = 0;
@@ -66,7 +66,7 @@ int matinv(int n,myuint X[],myuint Y[]) {
     found:
       if(xi == 0) return 0;
     }
-    
+
     /* Make diagonal element 1 */ {
       for(int j = i; j<n; j++)
 	X[p[i]*n+q[j]] *= xi;
@@ -163,14 +163,14 @@ public:
     Event* e = static_cast<Event *>(evt);
     lpptr->forward(thislp,e,tnow);
   }
-  
+
   static void backward_event(void *state, tw_bf *bf, void *evt, tw_lp *thislp) {
     Time tnow = tw_now(thislp);
     lp* lpptr = static_cast<lp *>(state);
     Event *e = static_cast<Event *>(evt);
     lpptr->backward(thislp,e,tnow);
   }
-  
+
   static void commit_event(void *state, tw_bf *bf, void *evt, tw_lp *thislp) {
     Time tnow = tw_now(thislp);
     lp* lpptr = static_cast<lp *>(state);
@@ -200,7 +200,7 @@ void rand_matrix(tw_lp *lpptr,int n,myuint A[],int imax) {
 
 struct matlp : public lp {
   typedef unsigned short uint;
-  uint *M,*T; 
+  uint *M,*T;
   const int n;
 
   struct global_stat_t {
@@ -234,7 +234,7 @@ struct matlp : public lp {
     assert(matinv(n,Xtmp,Xi) == 1);
     matmul(n,M,Xi,Xtmp);
     matcopy(n,M,Xtmp);
-    
+
     if(debug)
       assert(invcheck(n,M));
   }
@@ -320,7 +320,7 @@ struct matlp : public lp {
   void backward(tw_lp *twlp,Event *evt,const Time& now) {
     tw_rand_reverse_unif(twlp->rng);
     tw_rand_reverse_unif(twlp->rng);
-    
+
     unapply(evt->A);
     nbackward++;
   }
