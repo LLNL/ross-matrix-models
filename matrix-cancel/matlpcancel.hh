@@ -24,7 +24,7 @@ void matprint(int n,uint A[],const char *label) {
 
 struct Event {
   typedef unsigned int uint;
-  
+
   enum types { self,ping };
   types type;
 
@@ -67,7 +67,7 @@ public:
     Event *e = static_cast<Event *>(evt);
     lpptr->commit(thislp,e,tnow);
   }
-  
+
 };
 
 
@@ -93,7 +93,7 @@ void rand_matrix(tw_lp *lpptr,int n,myuint A[],int imax) {
 
 struct matlp : public lp {
   typedef unsigned int uint;
-  uint *M,*T; 
+  uint *M,*T;
   const int n;
 
   Event *next_event;
@@ -148,7 +148,7 @@ struct matlp : public lp {
       matprint(n,M,"M");
       matprint(n,T,"T");
     }
-    
+
     {
       tw_stime now = tw_now(lpptr);
       tw_stime trecv;
@@ -178,12 +178,12 @@ struct matlp : public lp {
 		 now.t,trecv.t,(int) lpptr->gid,(unsigned long long int) evtptr);
 	  matprint(n,evt->A,"A");
 	}
-	
+
 	tw_event_send(evtptr);
       }
     }
   }
-  
+
   ~matlp() {
     // Aggregate local statistics to global counters
     global_stat.nforward += nforward;
@@ -221,7 +221,7 @@ struct matlp : public lp {
 	     (unsigned long long int) lpptr,
 	     (long long int) (lpptr->id));
   }
-  
+
   static void finalize(void *state,tw_lp *lpptr) {
     static_cast<lp *>(state)->~lp();
   }
@@ -280,7 +280,7 @@ struct matlp : public lp {
 	  evt->nretract = 0;
 	  evt->nforward = 0;
 	  evt->nbackward = 0;
-	  
+
 	  if(isend == 0) {
 	    next_event = evt;
 	    evt->type = Event::self;
@@ -317,7 +317,7 @@ struct matlp : public lp {
     } else {
       assert(0);
     }
-    
+
     for(int isend = 0; isend<nsend; isend++) {
       tw_rand_reverse_unif(twlp->rng);
       tw_rand_reverse_unif(twlp->rng);
@@ -363,7 +363,7 @@ struct matlp : public lp {
     delete evt->cancelled_by_me;
     ncommit++;
   }
-  
+
 };
 
 
