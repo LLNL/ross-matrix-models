@@ -237,7 +237,7 @@ struct matlp : public lp {
     /* Make new event to send... */ {
       long long int nlp_total =
 	((long long int) tw_nnodes()) *
-	((long long int) g_tw_npe) *
+        ((long long int) 1) *  // g_tw_npe is 1
 	((long long int) g_tw_nlp);
       tw_stime now = tw_now(twlp);
       tw_stime trecv;
