@@ -156,7 +156,7 @@ struct matlp : public lp {
       double dt = tw_rand_exponential(lpptr->rng,mean_delay);
       trecv.t = now.t + dt;
       trecv.bits[0] = lpptr->gid;
-      assert(TW_STIME_CMP(trecv, now) > 0);
+      assert(tw_stime_bits_cmp(trecv, now) > 0);
       if(trecv.t < g_tw_ts_end) {
 	tw_event *evtptr = tw_event_new(lpptr->gid,trecv,lpptr);
 	Event *evt = static_cast<Event *>(tw_event_data(evtptr));
@@ -265,7 +265,7 @@ struct matlp : public lp {
 	tw_lpid dest = tw_rand_integer(twlp->rng,0,nlp_total-1);
 	trecv.t = now.t + dt;
 	trecv.bits[0] = twlp->gid;
-        assert(TW_STIME_CMP(trecv, now) > 0);
+	assert(tw_stime_bits_cmp(trecv, now) > 0);
 
 	if(isend == 0) dest = twlp->gid;
 
@@ -347,15 +347,15 @@ struct matlp : public lp {
       {
 	tw_event *raw = get_raw_evt_ptr(*ii);
 	tw_stime cmptime = tw_now(twlp);
-	if(TW_STIME_CMP(cmptime, twlp->pe->GVT) < 0) cmptime = twlp->pe->GVT;
-	if(TW_STIME_CMP(raw->recv_ts, cmptime) > 0) {
+	if(tw_stime_bits_cmp(cmptime, twlp->pe->GVT) < 0) cmptime = twlp->pe->GVT;
+	if(tw_stime_bits_cmp(raw->recv_ts, cmptime) > 0) {
 	  assert((*ii)->nforward == (*ii)->nbackward);
 	  assert((*ii)->nretract == 0);
 	  (*ii)->nretract++;
 
 	  assert(raw->state.owner != TW_pe_free_q);
 	  nretract++;
-	  tw_event_cancel(get_raw_evt_ptr(*ii));
+	  tw_event_rescind(get_raw_evt_ptr(*ii));
 	}
       }
     }

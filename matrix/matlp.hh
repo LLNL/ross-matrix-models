@@ -254,7 +254,7 @@ struct matlp : public lp {
       double dt = tw_rand_exponential(lpptr->rng,mean_delay);
       trecv.t = now.t + dt;
       trecv.bits[0] = lpptr->gid;
-      assert(TW_STIME_CMP(trecv, now) > 0);
+      assert(tw_stime_bits_cmp(trecv, now) > 0);
       if(trecv.t < g_tw_ts_end) {
 	tw_event *evtptr = tw_event_new(lpptr->gid,trecv,lpptr);
 	Event *evt = static_cast<Event *>(tw_event_data(evtptr));
@@ -306,7 +306,7 @@ struct matlp : public lp {
       tw_lpid dest = tw_rand_integer(twlp->rng,0,nlp_total-1);
       trecv.t = now.t + dt;
       trecv.bits[0] = twlp->gid;
-      assert(TW_STIME_CMP(trecv, now) > 0);
+      assert(tw_stime_bits_cmp(trecv, now) > 0);
       if(trecv.t < g_tw_ts_end) {
         tw_event *evtptr = tw_event_new(dest,trecv,twlp);
         Event *evt = static_cast<Event *>(tw_event_data(evtptr));
